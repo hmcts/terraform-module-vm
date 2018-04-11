@@ -26,7 +26,7 @@ resource "azurerm_network_interface" "reform-nonprod" {
   }
 
   lifecycle {
-    ignore_changes = "name"
+    ignore_changes = ["name"]
   }
 }
 
