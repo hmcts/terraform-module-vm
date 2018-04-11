@@ -57,5 +57,3 @@ variable "delete_data_disks_on_termination" {
 variable "azure_subscription_id" {}
 variable "subnet" {}
 variable "vnet" {}
-
-

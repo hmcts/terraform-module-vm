@@ -24,6 +24,10 @@ resource "azurerm_network_interface" "reform-nonprod" {
     subnet_id                     = "/subscriptions/${var.azure_subscription_id}/resourceGroups/${var.resource_group}/providers/Microsoft.Network/virtualNetworks/${var.vnet}/subnets/${var.subnet}"
     private_ip_address_allocation = "dynamic"
   }
+
+  lifecycle {
+    ignore_changes = "name"
+  }
 }
 
 resource "random_string" "password" {
@@ -39,6 +43,11 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   network_interface_ids = ["${element(azurerm_network_interface.reform-nonprod.*.id, count.index)}"]
   vm_size               = "${var.vm_size}"
   availability_set_id   = "${var.avset_id}"
+
+
+  lifecycle {
+    ignore_changes = "name"
+  }
 
   delete_os_disk_on_termination    = "${var.delete_os_disk_on_termination}"
   delete_data_disks_on_termination = "${var.delete_data_disks_on_termination}"
