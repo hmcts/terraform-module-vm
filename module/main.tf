@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   }
 
   lifecycle {
-    ignore_changes = ["os_profile","name"]
+    ignore_changes = ["os_profile","name","network_interface_ids"]
   }
 
   os_profile_linux_config {
