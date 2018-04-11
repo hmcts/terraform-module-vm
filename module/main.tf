@@ -44,11 +44,6 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   vm_size               = "${var.vm_size}"
   availability_set_id   = "${var.avset_id}"
 
-
-  lifecycle {
-    ignore_changes = "name"
-  }
-
   delete_os_disk_on_termination    = "${var.delete_os_disk_on_termination}"
   delete_data_disks_on_termination = "${var.delete_data_disks_on_termination}"
 
@@ -73,7 +68,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   }
 
   lifecycle {
-    ignore_changes = ["os_profile"]
+    ignore_changes = ["os_profile","name"]
   }
 
   os_profile_linux_config {
