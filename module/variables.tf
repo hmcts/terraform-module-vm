@@ -16,8 +16,6 @@ variable "username" {
 
 variable "ssh_key" {}
 
-variable "subnet_id" {}
-
 variable "avset_id" {}
 
 variable "storage_account" {}
@@ -57,3 +55,7 @@ variable "delete_data_disks_on_termination" {
   default = "true"
 }
 variable "azure_subscription_id" {}
+variable "subnet" {}
+variable "vnet" {}
+
+
