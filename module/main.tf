@@ -87,8 +87,8 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
 
   tags {
     type      = "vm"
-    product   = "${lower(${var.product})}"
-    env       = "${lower(${var.env})}"
+    product   = "${lower("${var.product"})}"
+    env       = "${lower("${var.env}")}"
     tier      = "${var.tier}"
     ansible   = "${var.ansible}"
     terraform = "true"
