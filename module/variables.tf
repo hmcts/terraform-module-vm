@@ -54,6 +54,7 @@ variable "delete_os_disk_on_termination" {
 variable "delete_data_disks_on_termination" {
   default = "true"
 }
+
 variable "azure_subscription_id" {}
 variable "subnet" {}
 variable "vnet" {}
