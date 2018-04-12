@@ -24,10 +24,6 @@ resource "azurerm_network_interface" "reform-nonprod" {
     subnet_id                     = "/subscriptions/${var.azure_subscription_id}/resourceGroups/${var.resource_group}/providers/Microsoft.Network/virtualNetworks/${var.vnet}/subnets/${var.subnet}"
     private_ip_address_allocation = "dynamic"
   }
-
-  lifecycle {
-    ignore_changes = ["name"]
-  }
 }
 
 resource "random_string" "password" {
@@ -68,7 +64,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   }
 
   lifecycle {
-    ignore_changes = ["os_profile", "name", "network_interface_ids"]
+    ignore_changes = ["os_profile"]
   }
 
   os_profile_linux_config {
