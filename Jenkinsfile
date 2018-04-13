@@ -23,8 +23,14 @@ properties(
             ],
             [$class: 'VaultSecret', path: 'secret/devops/public_key', secretValues:
                 [[$class: 'VaultSecretValue', envVar: 'TF_VAR_ssh_pubkey', vaultKey: 'value']]
-            ]
+            ],
+            [$class: 'VaultSecret', path: 'secret/devops/ssh-port', secretValues:
+                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_port', vaultKey: 'value']]
+            ],
+            [$class: 'VaultSecret', path: 'secret/devops/vm-username', secretValues:
+                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_admin_username', vaultKey: 'value']]
         ]
+    ]
 
 node {
   ws("${WORKSPACE}") {
