@@ -59,7 +59,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
 
   os_profile {
     computer_name  = "${element(data.template_file.server_name.*.rendered, count.index)}"
-    admin_username = "${var.username}"
+    admin_username = "${var.admin_username}"
     admin_password = "${random_string.password.result}"
   }
 
