@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine_extension" "script" {
 
   settings = <<SETTINGS
     {
-        "commandToExecute": "iptables -t nat -A PREROUTING -p tcp --dport 444 -j REDIRECT --to-ports 22; iptables-save > /etc/sysconfig/iptables"
+        "commandToExecute": "iptables -t nat -A PREROUTING -p tcp --dport ${var.port} -j REDIRECT --to-ports 22; iptables-save > /etc/sysconfig/iptables"
     }
 SETTINGS
 }
