@@ -21,7 +21,7 @@ resource "azurerm_network_interface" "reform-nonprod" {
 
   ip_configuration {
     name                          = "${element(data.template_file.server_name.*.rendered, count.index)}-NIC"
-    subnet_id                     = "${var.subnet_id}"
+    subnet_id                     = "/subscriptions/${var.azure_subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Network/virtualNetworks/${var.vnet}/subnets/${var.subnet}"
     private_ip_address_allocation = "dynamic"
   }
 }
@@ -59,7 +59,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
 
   os_profile {
     computer_name  = "${element(data.template_file.server_name.*.rendered, count.index)}"
-    admin_username = "${var.username}"
+    admin_username = "${var.admin_username}"
     admin_password = "${random_string.password.result}"
   }
 
@@ -71,7 +71,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
     disable_password_authentication = true
 
     ssh_keys {
-      path     = "/home/${var.username}/.ssh/authorized_keys"
+      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
       key_data = "${var.ssh_key}"
     }
   }
@@ -83,8 +83,8 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
 
   tags {
     type      = "vm"
-    product   = "${var.product}"
-    env       = "${var.env}"
+    product = "${lower("${var.product}")}"
+    env     = "${lower("${var.env}")}"
     tier      = "${var.tier}"
     ansible   = "${var.ansible}"
     terraform = "true"
@@ -105,7 +105,7 @@ resource "azurerm_virtual_machine_extension" "script" {
 
   settings = <<SETTINGS
     {
-        "commandToExecute": "iptables -t nat -A PREROUTING -p tcp --dport 444 -j REDIRECT --to-ports 22; iptables-save > /etc/sysconfig/iptables"
+        "commandToExecute": "iptables -t nat -A PREROUTING -p tcp --dport ${var.port} -j REDIRECT --to-ports 22; iptables-save > /etc/sysconfig/iptables"
     }
 SETTINGS
 }
