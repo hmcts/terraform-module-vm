@@ -59,3 +59,4 @@ variable "azure_subscription_id" {}
 variable "subnet" {}
 variable "vnet" {}
 variable "resource_group_name" {}
+variable "port" {}
