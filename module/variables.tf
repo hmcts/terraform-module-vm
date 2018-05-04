@@ -10,8 +10,7 @@ variable "location" {
   default = "uksouth"
 }
 
-variable "admin_username" {
-}
+variable "admin_username" {}
 
 variable "ssh_key" {}
 
