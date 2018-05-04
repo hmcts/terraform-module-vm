@@ -43,6 +43,8 @@ node {
 
         stage('Run terraform fmt') {
             dir ("${WORKSPACE}/module") {
+                sh("echo PATH=$PATH")
+                sh("ls -lh /usr/local/sbin/terraform")
                 def fmtExitCode = sh(returnStatus: true, script: """terraform fmt -check=true""")
                 echo("Terraform fmt exit status was ${fmtExitCode}")
                 if (fmtExitCode != 0) {
