@@ -46,7 +46,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   storage_image_reference {
     publisher = "OpenLogic"
     offer     = "CentOS"
-    sku       = "7.3"
+    sku       = "7.4"
     version   = "latest"
   }
 
@@ -64,7 +64,7 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
   }
 
   lifecycle {
-    ignore_changes = ["os_profile"]
+    ignore_changes = ["os_profile", "storage_image_reference"]
   }
 
   os_profile_linux_config {
@@ -83,8 +83,8 @@ resource "azurerm_virtual_machine" "reform-nonprod" {
 
   tags {
     type      = "vm"
-    product = "${lower("${var.product}")}"
-    env     = "${lower("${var.env}")}"
+    product   = "${lower("${var.product}")}"
+    env       = "${lower("${var.env}")}"
     tier      = "${var.tier}"
     ansible   = "${var.ansible}"
     terraform = "true"
