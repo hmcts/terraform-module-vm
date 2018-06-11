@@ -9,28 +9,28 @@ properties(
 
 @Library('Reform') _
 
-        def env = "sandbox"
-        def product = "sandbox"
+def env = "sandbox"
+def product = "sandbox"
 
-        def secrets = [
-            // The following entry is required for the backend
-            [$class: 'VaultSecret', path: 'secret/devops/azure_subsription_ids', secretValues:
-                [[$class: 'VaultSecretValue', envVar: 'ARM_SUBSCRIPTION_ID', vaultKey: "${env}"]]
-            ],
-            // The following entries are required for variables interpolation
-            [$class: 'VaultSecret', path: 'secret/devops/azure_subsription_ids', secretValues:
-                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_subscription_id', vaultKey: "${env}"]]
-            ],
-            [$class: 'VaultSecret', path: 'secret/devops/public_key', secretValues:
-                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_ssh_pubkey', vaultKey: 'value']]
-            ],
-            [$class: 'VaultSecret', path: 'secret/devops/ssh-port', secretValues:
-                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_port', vaultKey: 'value']]
-            ],
-            [$class: 'VaultSecret', path: 'secret/devops/vm-username', secretValues:
-                [[$class: 'VaultSecretValue', envVar: 'TF_VAR_admin_username', vaultKey: 'value']]
-        ]
+def secrets = [
+    // The following entry is required for the backend
+    [$class: 'VaultSecret', path: 'secret/devops/azure_subsription_ids', secretValues:
+        [[$class: 'VaultSecretValue', envVar: 'ARM_SUBSCRIPTION_ID', vaultKey: "${env}"]]
+    ],
+    // The following entries are required for variables interpolation
+    [$class: 'VaultSecret', path: 'secret/devops/azure_subsription_ids', secretValues:
+        [[$class: 'VaultSecretValue', envVar: 'TF_VAR_subscription_id', vaultKey: "${env}"]]
+    ],
+    [$class: 'VaultSecret', path: 'secret/devops/public_key', secretValues:
+        [[$class: 'VaultSecretValue', envVar: 'TF_VAR_ssh_pubkey', vaultKey: 'value']]
+    ],
+    [$class: 'VaultSecret', path: 'secret/devops/ssh-port', secretValues:
+        [[$class: 'VaultSecretValue', envVar: 'TF_VAR_port', vaultKey: 'value']]
+    ],
+    [$class: 'VaultSecret', path: 'secret/devops/vm-username', secretValues:
+        [[$class: 'VaultSecretValue', envVar: 'TF_VAR_admin_username', vaultKey: 'value']]
     ]
+]
 
 node {
   ws("${WORKSPACE}") {
