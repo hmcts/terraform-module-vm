@@ -7,6 +7,8 @@ properties(
    pipelineTriggers([[$class: 'GitHubPushTrigger']])]
 )
 
+@Library('Reform') _
+
 def env = "sandbox"
 def product = "sandbox"
 
